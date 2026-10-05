@@ -1,0 +1,80 @@
+<div class="register-container">
+  <form (ngSubmit)="onRegister()" class="register-form">
+    <h2>Registro de Institución</h2>
+
+    <div *ngIf="mensajeError" class="alert-error">
+      {{ mensajeError }}
+    </div>
+
+    <div *ngIf="mensajeExito" class="alert-success">
+      {{ mensajeExito }}
+    </div>
+
+    <div class="form-group">
+      <label for="nombre">Nombre de la Institución / Empresa *</label>
+      <input 
+        type="text" 
+        id="nombre" 
+        [(ngModel)]="usuario.nombre_institucion" 
+        name="nombre_institucion" 
+        required 
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Correo Electrónico *</label>
+      <input 
+        type="email" 
+        id="email" 
+        [(ngModel)]="usuario.email" 
+        name="email" 
+        required 
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Contraseña *</label>
+      <input 
+        type="password" 
+        id="password" 
+        [(ngModel)]="usuario.password" 
+        name="password" 
+        required 
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="telefono">Teléfono</label>
+      <input 
+        type="text" 
+        id="telefono" 
+        [(ngModel)]="usuario.telefono" 
+        name="telefono" 
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="direccion">Dirección</label>
+      <input 
+        type="text" 
+        id="direccion" 
+        [(ngModel)]="usuario.direccion" 
+        name="direccion" 
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="rol">Tipo de Usuario *</label>
+      <select id="rol" [(ngModel)]="usuario.id_rol" name="id_rol" required>
+        <option [ngValue]="1">Donante (Supermercado / Empresa)</option>
+        <option [ngValue]="2">Beneficiario (Comedor / Fundación)</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn-submit">Registrarse</button>
+
+    <p class="redirect-text">
+      ¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a>
+    </p>
+  </form>
+</div>

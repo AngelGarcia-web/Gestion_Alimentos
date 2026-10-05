@@ -1,0 +1,69 @@
+<div class="solicitudes-container">
+  <h2>Gestión de Solicitudes de Alimentos</h2>
+
+  <div *ngIf="mensajeExito" class="alert-success">{{ mensajeExito }}</div>
+  <div *ngIf="mensajeError" class="alert-error">{{ mensajeError }}</div>
+
+  <div class="table-container">
+    <table class="tabla-solicitudes">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Alimento</th>
+          <th>Solicitante</th>
+          <th>Mensaje</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th *ngIf="esDonanteOAdmin">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let solicitud of solicitudes">
+          <td>#{{ solicitud.id_solicitud }}</td>
+          <td>{{ solicitud.alimento || 'N/A' }}</td>
+          <td>{{ solicitud.solicitante || 'N/A' }}</td>
+          <td>{{ solicitud.mensaje || 'Sin mensaje' }}</td>
+          <td>{{ solicitud.fecha_solicitud | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>
+            <span 
+              class="badge" 
+              [ngClass]="(solicitud.estado || 'pendiente').toLowerCase()">
+              {{ solicitud.estado || 'pendiente' }}
+            </span>
+          </td>
+          <td *ngIf="esDonanteOAdmin">
+            <div class="actions-group" *ngIf="solicitud.estado?.toLowerCase() === 'pendiente'">
+              <button 
+                (click)="actualizarEstado(solicitud.id_solicitud, 'aprobada')" 
+                class="btn-approve">
+                Aprobar
+              </button>
+              <button 
+                (click)="actualizarEstado(solicitud.id_solicitud, 'rechazada')" 
+                class="btn-reject">
+                Rechazar
+              </button>
+            </div>
+            <span *ngIf="solicitud.estado?.toLowerCase() !== 'pendiente'" class="text-muted">
+              Sin acciones
+            </span>
+          </td>
+        </tr>
+
+        <!-- Mensaje de Carga -->
+        <tr *ngIf="cargando">
+          <td [attr.colspan]="esDonanteOAdmin ? 7 : 6" class="text-center">
+            Cargando solicitudes...
+          </td>
+        </tr>
+
+        <!-- Sin solicitudes -->
+        <tr *ngIf="!cargando && solicitudes.length === 0">
+          <td [attr.colspan]="esDonanteOAdmin ? 7 : 6" class="text-center">
+            No se encontraron solicitudes registradas.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

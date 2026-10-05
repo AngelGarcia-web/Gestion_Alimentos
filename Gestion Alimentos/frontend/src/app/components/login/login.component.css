@@ -1,0 +1,142 @@
+.login-container {
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 25px;
+box-sizing: border-box;
+background: #f4f7f5;
+font-family: Segoe UI, Arial, sans-serif;
+}
+
+/* Formulario */
+.login-form {
+width: 100%;
+max-width: 430px;
+padding: 35px;
+box-sizing: border-box;
+background: #ffffff;
+border: 1px solid #e2e8e4;
+border-radius: 16px;
+box-shadow: 0 8px 25px rgba(31, 41, 55, 0.08);
+}
+
+/* Título */
+.login-form h2 {
+margin: 0 0 28px;
+text-align: center;
+color: #14532d;
+font-size: 26px;
+font-weight: 700;
+}
+
+/* Mensaje de error */
+.alert-error {
+padding: 13px 15px;
+margin-bottom: 20px;
+border-radius: 8px;
+background: #fee2e2;
+border: 1px solid #fca5a5;
+color: #991b1b;
+font-size: 14px;
+font-weight: 500;
+}
+
+/* Campos */
+.form-group {
+display: flex;
+flex-direction: column;
+gap: 8px;
+margin-bottom: 20px;
+}
+
+.form-group label {
+color: #374151;
+font-size: 14px;
+font-weight: 600;
+}
+
+.form-group input {
+width: 100%;
+min-height: 44px;
+padding: 11px 13px;
+box-sizing: border-box;
+border: 1px solid #d1d5db;
+border-radius: 8px;
+background: #ffffff;
+color: #1f2937;
+font-family: inherit;
+font-size: 14px;
+outline: none;
+transition: all 0.2s ease;
+}
+
+.form-group input:focus {
+border-color: #16a34a;
+box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
+}
+
+.form-group input:hover {
+border-color: #9ca3af;
+}
+
+/* Botón */
+.btn-submit {
+width: 100%;
+margin-top: 5px;
+padding: 13px;
+border: none;
+border-radius: 8px;
+background: #15803d;
+color: #ffffff;
+font-family: inherit;
+font-size: 15px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.25s ease;
+}
+
+.btn-submit:hover {
+background: #166534;
+transform: translateY(-1px);
+box-shadow: 0 5px 12px rgba(21, 128, 61, 0.2);
+}
+
+.btn-submit:active {
+transform: translateY(0);
+}
+
+/* Texto de registro */
+.redirect-text {
+margin: 22px 0 0;
+text-align: center;
+color: #6b7280;
+font-size: 14px;
+}
+
+.redirect-text a {
+color: #15803d;
+font-weight: 600;
+text-decoration: none;
+transition: color 0.2s ease;
+}
+
+.redirect-text a:hover {
+color: #166534;
+text-decoration: underline;
+}
+
+/* Celulares */
+@media (max-width: 500px) {
+.login-container {
+padding: 15px;
+}
+
+.login-form {
+padding: 28px 22px;
+}
+
+.login-form h2 {
+font-size: 23px;
+}
+}

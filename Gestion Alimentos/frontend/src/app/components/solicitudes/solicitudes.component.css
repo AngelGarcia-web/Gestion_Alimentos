@@ -1,0 +1,245 @@
+.solicitudes-container {
+padding: 30px;
+min-height: 100vh;
+background: #f4f7f5;
+font-family: Segoe UI, Arial, sans-serif;
+color: #1f2937;
+box-sizing: border-box;
+}
+
+.solicitudes-container h2 {
+margin: 0 0 28px;
+padding-bottom: 18px;
+border-bottom: 2px solid #dce8df;
+color: #14532d;
+font-size: 26px;
+font-weight: 700;
+}
+
+/* Mensajes */
+.alert-success,
+.alert-error {
+padding: 14px 18px;
+margin-bottom: 20px;
+border-radius: 9px;
+font-size: 14px;
+font-weight: 500;
+}
+
+.alert-success {
+background: #dcfce7;
+border: 1px solid #86efac;
+color: #166534;
+}
+
+.alert-error {
+background: #fee2e2;
+border: 1px solid #fca5a5;
+color: #991b1b;
+}
+
+/* Contenedor de tabla */
+.table-container {
+width: 100%;
+overflow-x: auto;
+background: #ffffff;
+border: 1px solid #e2e8e4;
+border-radius: 14px;
+box-shadow: 0 5px 18px rgba(31, 41, 55, 0.06);
+}
+
+/* Tabla */
+.tabla-solicitudes {
+width: 100%;
+border-collapse: collapse;
+text-align: left;
+white-space: nowrap;
+}
+
+.tabla-solicitudes thead {
+background: #166534;
+color: #ffffff;
+}
+
+.tabla-solicitudes th {
+padding: 16px 18px;
+font-size: 13px;
+font-weight: 600;
+letter-spacing: 0.2px;
+}
+
+.tabla-solicitudes td {
+padding: 15px 18px;
+border-bottom: 1px solid #e5e7eb;
+color: #374151;
+font-size: 14px;
+vertical-align: middle;
+}
+
+.tabla-solicitudes tbody tr {
+transition: background 0.2s ease;
+}
+
+.tabla-solicitudes tbody tr:hover {
+background: #f0fdf4;
+}
+
+.tabla-solicitudes tbody tr:last-child td {
+border-bottom: none;
+}
+
+/* ID */
+.tabla-solicitudes td:first-child {
+color: #166534;
+font-weight: 700;
+}
+
+/* Mensaje */
+.tabla-solicitudes td:nth-child(4) {
+max-width: 280px;
+white-space: normal;
+line-height: 1.4;
+}
+
+/* Badge de estado */
+.badge {
+display: inline-block;
+padding: 6px 11px;
+border-radius: 20px;
+background: #f3f4f6;
+color: #4b5563;
+font-size: 12px;
+font-weight: 700;
+text-transform: capitalize;
+}
+
+/* Pendiente */
+.badge.pendiente,
+.badge.Pendiente {
+background: #fef3c7;
+color: #92400e;
+}
+
+/* Aprobada */
+.badge.aprobada,
+.badge.Aprobada {
+background: #dcfce7;
+color: #166534;
+}
+
+/* Rechazada */
+.badge.rechazada,
+.badge.Rechazada {
+background: #fee2e2;
+color: #b91c1c;
+}
+
+/* Acciones */
+.actions-group {
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+/* Botón aprobar */
+.btn-approve {
+padding: 8px 13px;
+border: 1px solid #86efac;
+border-radius: 7px;
+background: #dcfce7;
+color: #166534;
+font-family: inherit;
+font-size: 13px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s ease;
+}
+
+.btn-approve:hover {
+background: #16a34a;
+border-color: #16a34a;
+color: #ffffff;
+transform: translateY(-1px);
+}
+
+/* Botón rechazar */
+.btn-reject {
+padding: 8px 13px;
+border: 1px solid #fca5a5;
+border-radius: 7px;
+background: #fee2e2;
+color: #b91c1c;
+font-family: inherit;
+font-size: 13px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s ease;
+}
+
+.btn-reject:hover {
+background: #dc2626;
+border-color: #dc2626;
+color: #ffffff;
+transform: translateY(-1px);
+}
+
+/* Sin acciones */
+.text-muted {
+color: #9ca3af;
+font-size: 13px;
+font-style: italic;
+}
+
+/* Tabla vacía */
+.text-center {
+padding: 40px 20px !important;
+text-align: center;
+color: #6b7280 !important;
+font-size: 14px !important;
+white-space: normal;
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+.solicitudes-container {
+padding: 22px 15px;
+}
+
+.solicitudes-container h2 {
+font-size: 23px;
+}
+
+.tabla-solicitudes th,
+.tabla-solicitudes td {
+padding: 13px;
+}
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+.solicitudes-container {
+padding: 18px 10px;
+}
+
+.solicitudes-container h2 {
+font-size: 21px;
+}
+
+.table-container {
+border-radius: 10px;
+}
+
+.tabla-solicitudes {
+min-width: 850px;
+}
+
+.actions-group {
+flex-direction: column;
+align-items: stretch;
+}
+
+.btn-approve,
+.btn-reject {
+width: 100%;
+}
+}

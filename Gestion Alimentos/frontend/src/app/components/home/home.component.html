@@ -1,0 +1,77 @@
+<div class="home-container">
+  <!-- Cabecera Integrada (Título + Filtro en una sola barra) -->
+  <div class="header-section">
+    <h2 class="page-title">Publicaciones de Alimentos Disponibles</h2>
+
+    <div class="filter-group">
+      <label for="categoriaSelect" class="filter-label">Categoría:</label>
+      <select 
+        id="categoriaSelect" 
+        [(ngModel)]="categoriaSeleccionada" 
+        (change)="filtrar()" 
+        class="filter-select">
+        <option [value]="0">Todas las categorías</option>
+        <option *ngFor="let cat of categorias" [value]="cat.id_categoria">
+          {{ cat.nombre }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="mensajeRespuesta" class="alert alert-success">{{ mensajeRespuesta }}</div>
+  <div *ngIf="mensajeError" class="alert alert-danger">{{ mensajeError }}</div>
+
+  <!-- Grid de Alimentos -->
+  <div *ngIf="alimentosFiltrados.length > 0; else sinAlimentos" class="cards-grid">
+    <div class="card-item" *ngFor="let alimento of alimentosFiltrados">
+      <div>
+        <div class="card-header">
+          <h3 class="card-title">{{ alimento.titulo }}</h3>
+          <span 
+            class="badge" 
+            [ngClass]="{
+              'badge-disponible': alimento.estado?.toLowerCase() === 'disponible',
+              'badge-reservado': alimento.estado?.toLowerCase() === 'reservado',
+              'badge-entregado': alimento.estado?.toLowerCase() === 'entregado'
+            }">
+            {{ alimento.estado }}
+          </span>
+        </div>
+
+        <p class="card-description">{{ alimento.descripcion }}</p>
+
+        <div class="details-list">
+          <div class="detail-row">
+            <span>Cantidad:</span>
+            <strong>{{ alimento.cantidad }} {{ alimento.unidad_medida }}</strong>
+          </div>
+          <div class="detail-row">
+            <span>Vencimiento:</span>
+            <strong>{{ alimento.fecha_vencimiento | date:'dd/MM/yyyy' }}</strong>
+          </div>
+          <div *ngIf="alimento.categoria_nombre || alimento.categoria" class="detail-row">
+            <span>Categoría:</span>
+            <strong>{{ alimento.categoria_nombre || alimento.categoria }}</strong>
+          </div>
+          <div *ngIf="alimento.nombre_institucion" class="detail-row">
+            <span>Donante:</span>
+            <strong>{{ alimento.nombre_institucion }}</strong>
+          </div>
+        </div>
+      </div>
+
+      <button 
+        *ngIf="esBeneficiario && alimento.estado?.toLowerCase() === 'disponible'" 
+        (click)="solicitarAlimento(alimento.id_publicacion)" 
+        class="btn-solicitar">
+        Solicitar Alimento
+      </button>
+    </div>
+  </div>
+
+  <ng-template #sinAlimentos>
+    <div class="empty-state">
+      <p>No se encontraron publicaciones de alimentos disponibles.</p>
+    </div>
+  </ng-template>
+</div>

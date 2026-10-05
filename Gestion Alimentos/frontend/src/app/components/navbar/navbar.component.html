@@ -1,0 +1,46 @@
+<nav class="navbar" *ngIf="usuarioActual">
+  <div class="navbar-brand">
+    <a routerLink="/home">Gestión Alimentos</a>
+  </div>
+
+  <ul class="navbar-links">
+    <li>
+      <a routerLink="/home">Inicio</a>
+    </li>
+
+    <li *ngIf="esAdmin">
+      <a routerLink="/dashboard">Panel Admin</a>
+    </li>
+
+    <li *ngIf="esAdmin">
+      <a routerLink="/usuarios">Usuarios</a>
+    </li>
+
+    <li *ngIf="esDonante">
+      <a routerLink="/mis-alimentos">Mis Publicaciones</a>
+    </li>
+
+    <li *ngIf="esBeneficiario">
+      <a routerLink="/solicitudes">Mis Solicitudes</a>
+    </li>
+
+    <li>
+      <a routerLink="/historial">Historial</a>
+    </li>
+
+    <li>
+      <a routerLink="/perfil">Perfil</a>
+    </li>
+  </ul>
+
+  <div class="navbar-user">
+    <div class="user-avatar">
+      <img *ngIf="usuarioActual.foto_url" [src]="usuarioActual.foto_url" alt="Avatar" class="avatar-header-img" />
+      <span *ngIf="!usuarioActual.foto_url">
+        {{ usuarioActual.nombre_institucion ? usuarioActual.nombre_institucion.charAt(0).toUpperCase() : 'U' }}
+      </span>
+    </div>
+    <span>{{ usuarioActual.nombre_institucion }}</span>
+    <button (click)="logout()" class="btn-logout">Cerrar Sesión</button>
+  </div>
+</nav>
