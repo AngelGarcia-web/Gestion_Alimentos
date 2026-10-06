@@ -33,19 +33,14 @@ export const registrar = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  console.log('--- INTENTO DE LOGIN ---');
-  console.log('Email recibido:', email);
-  console.log('Password recibido (texto plano):', password);
 
   try {
     const [rows]: any = await db.query('SELECT * FROM usuarios WHERE email = ?', [email]);
     if (rows.length === 0) {
-      console.log('Error: El correo no existe en la base de datos.');
       return res.status(400).json({ mensaje: 'Credenciales inválidas' });
     }
 
     const usuario = rows[0];
-    console.log('Hash recuperado de BD:', usuario.password);
 
     let passwordValido = await bcrypt.compare(password, usuario.password);
     
@@ -55,13 +50,9 @@ export const login = async (req: Request, res: Response) => {
       await db.query('UPDATE usuarios SET password = ? WHERE id_usuario = ?', [nuevoHash, usuario.id_usuario]);
       usuario.password = nuevoHash;
       passwordValido = true;
-      console.log('¡Hash actualizado automáticamente al vuelo!');
     }
 
-    console.log('¿Contraseña válida?:', passwordValido);
-
     if (!passwordValido) {
-      console.log('Error: La contraseña no coincide con el hash.');
       return res.status(400).json({ mensaje: 'Credenciales inválidas' });
     }
 
@@ -83,11 +74,11 @@ export const login = async (req: Request, res: Response) => {
         email: usuario.email,
         telefono: usuario.telefono,
         direccion: usuario.direccion,
+        foto_url: usuario.foto_url,
         id_rol: usuario.id_rol
       }
     });
   } catch (error: any) {
-    console.error('Error interno en login:', error.message);
     res.status(500).json({ mensaje: 'Error al iniciar sesión', error: error.message });
   }
 };

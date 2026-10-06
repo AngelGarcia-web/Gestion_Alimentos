@@ -27,8 +27,17 @@ export class LoginComponent {
     }
 
     this.authService.login(this.credenciales).subscribe({
-      next: () => {
-        this.router.navigate(['/home']);
+      next: (res: any) => {
+        // Obtenemos el usuario logueado (ya sea de la respuesta o del servicio de autenticación)
+        const usuario = res?.usuario || this.authService.getUser();
+        const idRol = Number(usuario?.id_rol);
+
+        // Si es Administrador (id_rol === 3), lo redirigimos al panel/gestión de usuarios
+        if (idRol === 3) {
+          this.router.navigate(['/usuarios']); // Cambia a la ruta exacta de tu panel de admin si es distinta
+        } else {
+          this.router.navigate(['/home']);
+        }
       },
       error: (err) => {
         this.mensajeError = err.error?.mensaje || 'Error al iniciar sesión';

@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.authService.currentUser$.subscribe(usuario => {
       this.usuarioActual = usuario;
-      this.cdr.detectChanges(); // Forzamos la actualización inmediata de la vista
+      this.cdr.detectChanges(); 
     });
   }
 

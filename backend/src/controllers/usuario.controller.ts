@@ -1,6 +1,7 @@
 import { Response } from 'express';
 import { CustomRequest } from '../middlewares/auth.middleware';
 import db from '../config/db';
+import bcrypt from 'bcrypt';
 
 export const obtenerPerfil = async (req: CustomRequest, res: Response) => {
   const id_usuario = req.usuario?.id || req.usuario?.id_usuario;
@@ -28,9 +29,6 @@ export const obtenerPerfil = async (req: CustomRequest, res: Response) => {
 export const actualizarPerfil = async (req: CustomRequest, res: Response) => {
   const id_usuario = req.usuario?.id || req.usuario?.id_usuario;
   const { nombre_institucion, telefono, direccion, foto_url } = req.body;
-
-  // <-- AÑADE ESTO PARA DEPURAR
-  console.log('DATOS RECIBIDOS PARA ACTUALIZAR:', { id_usuario, nombre_institucion, telefono, direccion });
 
   try {
     await db.query(
@@ -69,5 +67,54 @@ export const listarUsuarios = async (req: CustomRequest, res: Response) => {
   } catch (error: any) {
     console.error('ERROR REAL EN LISTAR USUARIOS:', error);
     res.status(500).json({ mensaje: 'Error al listar usuarios', error: error.message });
+  }
+};
+
+export const actualizarUsuarioPorId = async (req: CustomRequest, res: Response) => {
+  const { id } = req.params;
+  const { nombre_institucion, telefono, direccion } = req.body;
+
+  try {
+    if (!id) {
+      return res.status(400).json({ mensaje: 'El ID de usuario es obligatorio' });
+    }
+
+    await db.query(
+      'UPDATE usuarios SET nombre_institucion = ?, telefono = ?, direccion = ? WHERE id_usuario = ?',
+      [nombre_institucion, telefono, direccion, id]
+    );
+
+    res.json({
+      mensaje: 'Usuario actualizado correctamente'
+    });
+  } catch (error: any) {
+    console.error('ERROR REAL EN ACTUALIZAR USUARIO POR ID:', error);
+    res.status(500).json({ mensaje: 'Error al actualizar usuario', error: error.message });
+  }
+};
+
+export const actualizarPasswordPorId = async (req: CustomRequest, res: Response) => {
+  const { id } = req.params;
+  const { password } = req.body;
+
+  try {
+    if (!id || !password) {
+      return res.status(400).json({ mensaje: 'El ID y la contraseña son obligatorios' });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    await db.query(
+      'UPDATE usuarios SET password = ? WHERE id_usuario = ?',
+      [hashedPassword, id]
+    );
+
+    res.json({
+      mensaje: 'Contraseña actualizada correctamente'
+    });
+  } catch (error: any) {
+    console.error('ERROR REAL EN ACTUALIZAR PASSWORD:', error);
+    res.status(500).json({ mensaje: 'Error al actualizar la contraseña', error: error.message });
   }
 };

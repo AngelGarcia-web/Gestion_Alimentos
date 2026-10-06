@@ -1,41 +1,50 @@
 <nav class="navbar" *ngIf="usuarioActual">
   <div class="navbar-brand">
-    <a routerLink="/home">Gestión Alimentos</a>
+    <a routerLink="/home" *ngIf="!esAdmin">Gestión Alimentos</a>
+    <span *ngIf="esAdmin" class="brand-text">Gestión Alimentos (Admin)</span>
   </div>
 
   <ul class="navbar-links">
-    <li>
+    <!-- Enlaces para usuarios comunes (No Administradores) -->
+    <li *ngIf="!esAdmin">
       <a routerLink="/home">Inicio</a>
     </li>
 
+    <!-- Enlaces exclusivos de Administrador -->
     <li *ngIf="esAdmin">
-      <a routerLink="/dashboard">Panel Admin</a>
+      <a routerLink="/dashboard" routerLinkActive="active">Panel Admin</a>
     </li>
 
     <li *ngIf="esAdmin">
-      <a routerLink="/usuarios">Usuarios</a>
+      <a routerLink="/usuarios" routerLinkActive="active">Usuarios</a>
     </li>
 
-    <li *ngIf="esDonante">
-      <a routerLink="/alimentos">Mis Publicaciones</a>
+    <li *ngIf="esAdmin">
+      <a routerLink="/historial" routerLinkActive="active">Historial Global</a>
     </li>
 
-    <!-- Visible para Donantes y Admins (Solicitudes hacia sus alimentos) -->
-    <li *ngIf="esDonante || esAdmin">
-      <a routerLink="/solicitudes">Solicitudes Recibidas</a>
+    <!-- Enlaces para Donantes -->
+    <li *ngIf="esDonante && !esAdmin">
+      <a routerLink="/alimentos" routerLinkActive="active">Mis Publicaciones</a>
     </li>
 
-    <!-- Visible solo para Beneficiarios (Sus propias solicitudes hechas) -->
-    <li *ngIf="esBeneficiario">
-      <a routerLink="/solicitudes">Mis Solicitudes</a>
+    <li *ngIf="esDonante && !esAdmin">
+      <a routerLink="/solicitudes" routerLinkActive="active">Solicitudes Recibidas</a>
     </li>
 
+    <!-- Enlaces para Beneficiarios -->
+    <li *ngIf="esBeneficiario && !esAdmin">
+      <a routerLink="/solicitudes" routerLinkActive="active">Mis Solicitudes</a>
+    </li>
+
+    <!-- Historial para usuarios normales -->
+    <li *ngIf="!esAdmin">
+      <a routerLink="/historial" routerLinkActive="active">Historial</a>
+    </li>
+
+    <!-- Perfil disponible para TODOS los roles (Admin, Donante, Beneficiario) -->
     <li>
-      <a routerLink="/historial">Historial</a>
-    </li>
-
-    <li>
-      <a routerLink="/perfil">Perfil</a>
+      <a routerLink="/perfil" routerLinkActive="active">Perfil</a>
     </li>
   </ul>
 

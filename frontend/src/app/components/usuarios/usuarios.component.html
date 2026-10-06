@@ -1,0 +1,90 @@
+<div class="usuarios-container">
+  <div class="header-section">
+    <h2>Gestión de Usuarios de la Plataforma</h2>
+  </div>
+
+  <div *ngIf="cargando" class="loading-state">
+    <p>Cargando usuarios...</p>
+  </div>
+
+  <div *ngIf="mensajeExito" class="alert alert-success">
+    {{ mensajeExito }}
+  </div>
+  <div *ngIf="mensajeError" class="alert alert-error">
+    {{ mensajeError }}
+  </div>
+
+  <!-- Formulario de Edición Mejorado -->
+  <div *ngIf="modoEdicion && usuarioSeleccionado" class="edit-card">
+    <div class="edit-card-header">
+      <h3>Editando a: <span>{{ usuarioSeleccionado.nombre_institucion }}</span> <small>(ID: #{{ usuarioSeleccionado.id_usuario }})</small></h3>
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Nombre / Institución</label>
+        <input type="text" [(ngModel)]="usuarioSeleccionado.nombre_institucion" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Teléfono</label>
+        <input type="text" [(ngModel)]="usuarioSeleccionado.telefono" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Dirección</label>
+        <input type="text" [(ngModel)]="usuarioSeleccionado.direccion" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Nueva Contraseña (Opcional)</label>
+        <input type="password" [(ngModel)]="nuevoPassword" placeholder="Dejar en blanco para no cambiar" class="form-control" />
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-save" (click)="actualizarUsuario()">Guardar Cambios</button>
+      <button class="btn-reset" *ngIf="nuevoPassword" (click)="resetearPassword(usuarioSeleccionado.id_usuario)">Solo Resetear Contraseña</button>
+      <button class="btn-cancel" (click)="cancelarEdicion()">Cancelar</button>
+    </div>
+  </div>
+
+  <!-- Tabla de Usuarios Moderna -->
+  <div class="table-container" *ngIf="!cargando">
+    <table class="modern-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Foto</th>
+          <th>Nombre / Institución</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>Rol</th>
+          <th>Registro</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of usuarios">
+          <td class="font-weight-bold">#{{ u.id_usuario }}</td>
+          <td>
+            <div class="user-avatar-small">
+              <img *ngIf="u.foto_url" [src]="u.foto_url" alt="Avatar" />
+              <span *ngIf="!u.foto_url">{{ u.nombre_institucion ? u.nombre_institucion.charAt(0).toUpperCase() : 'U' }}</span>
+            </div>
+          </td>
+          <td>{{ u.nombre_institucion }}</td>
+          <td>{{ u.telefono || 'No registrado' }}</td>
+          <td>{{ u.direccion || 'No registrada' }}</td>
+          <td>
+            <span class="badge-role" [ngClass]="{'badge-beneficiario': u.id_rol === 2, 'badge-donador': u.id_rol === 1}">
+              {{ u.id_rol === 3 ? 'Admin' : (u.id_rol === 2 ? 'Beneficiario' : 'Donador') }}
+            </span>
+          </td>
+          <td>{{ (u.fecha_registro || u.fecha_registro) | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>
+            <div class="action-buttons">
+              <button class="btn-edit" (click)="seleccionarUsuario(u)">Editar</button>
+              <button class="btn-delete" (click)="eliminarUsuario(u.id_usuario)">Eliminar</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

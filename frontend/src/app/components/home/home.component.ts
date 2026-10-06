@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
   mensajeRespuesta: string = '';
   mensajeError: string = '';
 
-  // Variables para el Modal de Solicitud
   mostrarModalSolicitud: boolean = false;
   alimentoSeleccionado: Alimento | null = null;
   mensajeSolicitud: string = '';
@@ -61,7 +60,17 @@ export class HomeComponent implements OnInit {
 
     peticion$.subscribe({
       next: (data) => {
-        this.alimentos = data || [];
+        const todos = data || [];
+        
+        if (rol === 1) {
+          this.alimentos = todos;
+        } else {
+          this.alimentos = todos.filter((a: any) => {
+            const estado = (a.estado || '').toLowerCase();
+            return estado !== 'entregado' && estado !== 'reservado';
+          });
+        }
+
         this.filtrar();
         this.cdr.detectChanges();
       },
@@ -81,7 +90,6 @@ export class HomeComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  // Abre el modal flotante en lugar de solicitar de golpe
   abrirModalSolicitud(alimento: Alimento): void {
     this.alimentoSeleccionado = alimento;
     this.mensajeSolicitud = 'Solicitud de alimento realizada desde la plataforma';
@@ -89,7 +97,6 @@ export class HomeComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  // Cierra el modal y limpia datos
   cerrarModalSolicitud(): void {
     this.mostrarModalSolicitud = false;
     this.alimentoSeleccionado = null;
@@ -97,7 +104,6 @@ export class HomeComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  // Envía la solicitud con el mensaje personalizado del modal
   enviarSolicitudModal(): void {
     if (!this.alimentoSeleccionado || !this.alimentoSeleccionado.id_publicacion) return;
 

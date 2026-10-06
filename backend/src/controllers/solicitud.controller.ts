@@ -43,7 +43,7 @@ export const obtenerSolicitudesDonante = async (req: CustomRequest, res: Respons
 
   try {
     const query = `
-      SELECT s.*, a.titulo AS alimento, u.nombre_institucion AS solicitante
+      SELECT s.*, a.titulo AS alimento, u.nombre_institucion AS solicitante, u.direccion, u.telefono
       FROM solicitudes s
       JOIN publicaciones_alimentos a ON s.id_publicacion = a.id_publicacion
       JOIN usuarios u ON s.id_usuario_solicitante = u.id_usuario

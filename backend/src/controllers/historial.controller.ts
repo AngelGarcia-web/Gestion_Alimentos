@@ -3,10 +3,13 @@ import { CustomRequest } from '../middlewares/auth.middleware';
 import db from '../config/db';
 
 export const obtenerHistorial = async (req: CustomRequest, res: Response) => {
+  const id_usuario = req.usuario?.id || req.usuario?.id_usuario;
+  const id_rol = Number(req.usuario?.id_rol);
+
   try {
-    const query = `
+    let query = `
       SELECT 
-        COALESCE(s.id_solicitud, a.id_publicacion) AS id_historial,
+        s.id_solicitud AS id_historial,
         s.id_solicitud,
         a.id_publicacion,
         a.titulo AS alimento,
@@ -17,17 +20,28 @@ export const obtenerHistorial = async (req: CustomRequest, res: Response) => {
         u_don.nombre_institucion AS donante,
         NOW() AS fecha_entrega,
         COALESCE(s.mensaje, 'Entrega registrada en el sistema') AS observaciones,
-        COALESCE(s.estado, a.estado) AS estado,
+        s.estado AS estado,
         1 AS confirmado_por_beneficiario
-      FROM publicaciones_alimentos a
-      LEFT JOIN solicitudes s ON a.id_publicacion = s.id_publicacion
+      FROM solicitudes s
+      JOIN publicaciones_alimentos a ON s.id_publicacion = a.id_publicacion
       LEFT JOIN usuarios u_sol ON s.id_usuario_solicitante = u_sol.id_usuario
       LEFT JOIN usuarios u_don ON a.id_usuario_donante = u_don.id_usuario
-      WHERE LOWER(a.estado) = 'entregado' 
-         OR LOWER(s.estado) IN ('entregado', 'completada')
+      WHERE LOWER(s.estado) IN ('entregado', 'completada')
     `;
 
-    const [historial]: any = await db.query(query);
+    const params: any[] = [];
+
+    if (id_rol === 1) {
+      query += ` AND a.id_usuario_donante = ?`;
+      params.push(id_usuario);
+    } else if (id_rol === 2) {
+      query += ` AND s.id_usuario_solicitante = ?`;
+      params.push(id_usuario);
+    }
+
+    query += ` ORDER BY s.id_solicitud DESC`;
+
+    const [historial]: any = await db.query(query, params);
     res.json(historial);
   } catch (error: any) {
     console.error('Error al obtener el historial:', error);

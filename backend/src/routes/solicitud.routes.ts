@@ -10,9 +10,9 @@ import { verifyToken } from '../middlewares/auth.middleware';
 
 const router = Router();
 
-router.get('/', verifyToken, obtenerSolicitudes);
 router.get('/mis-solicitudes', verifyToken, obtenerMisSolicitudes);
 router.get('/mis-solicitudes-donante', verifyToken, obtenerSolicitudesDonante);
+router.get('/', verifyToken, obtenerSolicitudes);
 router.post('/', verifyToken, crearSolicitud);
 router.patch('/:id', verifyToken, cambiarEstadoSolicitud);
 

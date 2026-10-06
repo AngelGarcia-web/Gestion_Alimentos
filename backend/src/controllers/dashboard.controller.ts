@@ -3,8 +3,8 @@ import { CustomRequest } from '../middlewares/auth.middleware';
 import db from '../config/db';
 
 export const obtenerEstadisticas = async (req: CustomRequest, res: Response) => {
-  const id_usuario = req.usuario.id;
-  const id_rol = req.usuario.id_rol;
+  const id_usuario = req.usuario?.id || req.usuario?.id_usuario || req.usuario?.userId || req.usuario?.idUsuario;
+  const id_rol = req.usuario?.id_rol || req.usuario?.rol;
 
   try {
     if (id_rol === 3) {

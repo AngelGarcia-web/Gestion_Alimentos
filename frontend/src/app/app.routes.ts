@@ -8,6 +8,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { AlimentosComponent } from './components/alimentos/alimentos.component';
 import { SolicitudesComponent } from './components/solicitudes/solicitudes.component';
 import { HistorialComponent } from './components/historial/historial.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,7 +23,7 @@ export const routes: Routes = [
     path: 'alimentos', 
     component: AlimentosComponent, 
     canActivate: [AuthGuard],
-    data: { roles: [1, 3] }
+    data: { roles: [1, 3] } // Donantes y Admins
   },
   { 
     path: 'solicitudes', 
@@ -40,7 +41,13 @@ export const routes: Routes = [
     path: 'dashboard', 
     component: DashboardComponent, 
     canActivate: [AuthGuard],
-    data: { roles: [1, 3] }
+    data: { roles: [3] } // <--- Exclusivo de Admin (Rol 3)
+  },
+  { 
+    path: 'usuarios', 
+    component: UsuariosComponent, 
+    canActivate: [AuthGuard],
+    data: { roles: [3] } // <--- Exclusivo de Admin (Rol 3)
   },
   { 
     path: 'perfil', 

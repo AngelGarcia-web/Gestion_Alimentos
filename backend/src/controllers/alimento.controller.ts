@@ -86,7 +86,7 @@ export const actualizarAlimento = async (req: CustomRequest, res: Response) => {
       return res.status(404).json({ mensaje: 'Alimento no encontrado' });
     }
 
-    if (rows[0].id_usuario_donante !== id_usuario && req.usuario.rol !== 3) {
+    if (rows[0].id_usuario_donante !== id_usuario && req.usuario.id_rol !== 3) {
       return res.status(403).json({ mensaje: 'No tienes permiso para modificar esta publicación' });
     }
 
@@ -111,7 +111,7 @@ export const eliminarAlimento = async (req: CustomRequest, res: Response) => {
       return res.status(404).json({ mensaje: 'Alimento no encontrado' });
     }
 
-    if (rows[0].id_usuario_donante !== id_usuario && req.usuario.rol !== 3) {
+    if (rows[0].id_usuario_donante !== id_usuario && req.usuario.id_rol !== 3) {
       return res.status(403).json({ mensaje: 'No tienes permiso para eliminar esta publicación' });
     }
 

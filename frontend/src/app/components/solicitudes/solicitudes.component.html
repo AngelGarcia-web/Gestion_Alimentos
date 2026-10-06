@@ -11,6 +11,8 @@
           <th>ID</th>
           <th>Alimento</th>
           <th>Solicitante</th>
+          <th *ngIf="esDonanteOAdmin">Dirección</th>
+          <th *ngIf="esDonanteOAdmin">Teléfono</th>
           <th>Mensaje</th>
           <th>Fecha</th>
           <th>Estado</th>
@@ -22,6 +24,8 @@
           <td>#{{ solicitud.id_solicitud }}</td>
           <td>{{ solicitud.alimento || 'N/A' }}</td>
           <td>{{ solicitud.solicitante || 'N/A' }}</td>
+          <td *ngIf="esDonanteOAdmin">{{ $any(solicitud).direccion || 'No especificada' }}</td>
+          <td *ngIf="esDonanteOAdmin">{{ $any(solicitud).telefono || 'No especificado' }}</td>
           <td>{{ solicitud.mensaje || 'Sin mensaje' }}</td>
           <td>{{ solicitud.fecha_solicitud | date:'dd/MM/yyyy HH:mm' }}</td>
           <td>
@@ -32,7 +36,6 @@
             </span>
           </td>
           <td *ngIf="esDonanteOAdmin">
-            <!-- Si está pendiente: Aprobar o Rechazar -->
             <div class="actions-group" *ngIf="solicitud.estado?.toLowerCase() === 'pendiente'">
               <button 
                 (click)="actualizarEstado(solicitud.id_solicitud, 'aprobada')" 
@@ -46,7 +49,6 @@
               </button>
             </div>
 
-            <!-- NUEVO: Si ya está aprobada: Botón para marcar como entregado / completado -->
             <div class="actions-group" *ngIf="solicitud.estado?.toLowerCase() === 'aprobada'">
               <button 
                 (click)="actualizarEstado(solicitud.id_solicitud, 'completada')" 
@@ -55,23 +57,20 @@
               </button>
             </div>
 
-            <!-- Si ya finalizó (completada o rechazada) -->
             <span *ngIf="solicitud.estado?.toLowerCase() === 'completada' || solicitud.estado?.toLowerCase() === 'rechazada'" class="text-muted">
               Finalizada
             </span>
           </td>
         </tr>
 
-        <!-- Mensaje de Carga -->
         <tr *ngIf="cargando">
-          <td [attr.colspan]="esDonanteOAdmin ? 7 : 6" class="text-center">
+          <td [attr.colspan]="esDonanteOAdmin ? 9 : 6" class="text-center">
             Cargando solicitudes...
           </td>
         </tr>
 
-        <!-- Sin solicitudes -->
         <tr *ngIf="!cargando && solicitudes.length === 0">
-          <td [attr.colspan]="esDonanteOAdmin ? 7 : 6" class="text-center">
+          <td [attr.colspan]="esDonanteOAdmin ? 9 : 6" class="text-center">
             No se encontraron solicitudes registradas.
           </td>
         </tr>

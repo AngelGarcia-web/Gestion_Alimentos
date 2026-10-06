@@ -22,4 +22,18 @@ export class UsuarioService {
   listarTodos(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.apiUrl}/todos`);
   }
+
+  // Método para actualizar los datos de un usuario por ID (desde el panel admin)
+  actualizarUsuario(id: number, datos: Partial<Usuario>): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, datos);
+  }
+
+  // Método específico para resetear/actualizar la contraseña de un usuario por ID
+  actualizarPassword(id: number, password: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}/password`, { password });
+  }
+
+  eliminarUsuario(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }
