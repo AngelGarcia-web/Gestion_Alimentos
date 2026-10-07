@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardService, DashboardStats } from '../../services/dashboard.service';
-import { UsuarioService } from '../../services/usuario.service';
-import { Usuario } from '../../models/usuario';
+import { DashboardService } from '../../core/services/dashboard.service';
+import { DashboardStats } from '../../core/models/dashboard';
+import { UsuarioService } from '../../core/services/usuario.service';
+import { Usuario } from '../../core/models/usuario';
 
 @Component({
   selector: 'app-dashboard',

@@ -9,7 +9,7 @@
   <div *ngIf="mensajeExito" class="alert-success">{{ mensajeExito }}</div>
   <div *ngIf="mensajeError" class="alert-error">{{ mensajeError }}</div>
 
-  <!-- Formulario desplegable para Crear / Editar -->
+
   <form *ngIf="mostrarFormulario" (ngSubmit)="guardarAlimento()" class="form-alimento">
     <h3>{{ editando ? 'Editar Publicación' : 'Publicar Nuevo Alimento' }}</h3>
 
@@ -59,7 +59,6 @@
     </button>
   </form>
 
-  <!-- Barra de Búsqueda -->
   <div class="search-container" style="margin: 20px 0;">
     <input 
       type="text" 

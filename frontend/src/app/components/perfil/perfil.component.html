@@ -1,7 +1,6 @@
 <div class="perfil-container">
   <h2>Mi Perfil de Institución</h2>
 
-  <!-- Sección Avatar con Carga de Archivo -->
   <div class="avatar-section">
     <div class="avatar-circle">
       <img *ngIf="usuario.foto_url" [src]="usuario.foto_url" alt="Foto de Perfil" class="avatar-img" />
@@ -14,7 +13,6 @@
       <h3>{{ usuario.nombre_institucion || 'Usuario' }}</h3>
       <p class="role-badge">Institución Benéfica</p>
       
-      <!-- Input oculto y botón para subir imagen -->
       <input type="file" #fileInput (change)="onFotoSeleccionada($event)" accept="image/*" style="display: none" />
       <button type="button" class="btn-change-photo" (click)="fileInput.click()">
         Seleccionar foto

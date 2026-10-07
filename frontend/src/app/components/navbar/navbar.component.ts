@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { Usuario } from '../../models/usuario';
+import { AuthService } from '../../core/services/auth.service';
+import { Usuario } from '../../core/models/usuario';
 
 @Component({
   selector: 'app-navbar',

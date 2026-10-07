@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AlimentoService } from '../../services/alimento.service';
-import { CategoriaService } from '../../services/categoria.service';
-import { SolicitudService } from '../../services/solicitud.service';
-import { AuthService } from '../../services/auth.service';
-import { Alimento } from '../../models/alimento';
-import { Categoria } from '../../models/categoria';
+import { AlimentoService } from '../../core/services/alimento.service';
+import { CategoriaService } from '../../core/services/categoria.service';
+import { SolicitudService } from '../../core/services/solicitud.service';
+import { AuthService } from '../../core/services/auth.service';
+import { Alimento } from '../../core/models/alimento';
+import { Categoria } from '../../core/models/categoria';
 
 @Component({
   selector: 'app-home',

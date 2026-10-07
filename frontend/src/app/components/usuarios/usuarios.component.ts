@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UsuarioService } from '../../services/usuario.service';
-import { AuthService } from '../../services/auth.service';
-import { Usuario } from '../../models/usuario';
+import { UsuarioService } from '../../core/services/usuario.service';
+import { AuthService } from '../../core/services/auth.service';
+import { Usuario } from '../../core/models/usuario';
 
 @Component({
   selector: 'app-usuarios',
@@ -72,7 +72,6 @@ export class UsuariosComponent implements OnInit {
   actualizarUsuario(): void {
     if (!this.usuarioSeleccionado || !this.usuarioSeleccionado.id_usuario) return;
 
-    // Preparamos los datos limpios a enviar (sin alterar campos protegidos como id_rol o contraseña directamente si no toca)
     const datosActualizar = {
       nombre_institucion: this.usuarioSeleccionado.nombre_institucion,
       telefono: this.usuarioSeleccionado.telefono,
@@ -81,7 +80,7 @@ export class UsuariosComponent implements OnInit {
 
     this.usuarioService.actualizarUsuario(this.usuarioSeleccionado.id_usuario, datosActualizar).subscribe({
       next: () => {
-        // Si además se escribió una nueva contraseña, la actualizamos en secuencia
+      
         if (this.nuevoPassword && this.nuevoPassword.trim().length >= 6) {
           this.usuarioService.actualizarPassword(this.usuarioSeleccionado!.id_usuario!, this.nuevoPassword).subscribe({
             next: () => {

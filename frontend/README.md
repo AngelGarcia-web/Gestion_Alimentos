@@ -1,59 +1,17 @@
-# Frontend
+##  Propuesta del Proyecto
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.3.
+### 1. Descripción del Proyecto
+Aplicación web desarrollada para optimizar el aprovechamiento de excedentes alimentarios y reducir el desperdicio de comida. La plataforma funciona como un puente digital entre establecimientos comerciales (restaurantes, supermercados y productores) que cuentan con alimentos aptos pero no comercializables, e instituciones sociales o bancos de alimentos que los necesitan, centralizando la oferta y la demanda en un solo lugar.
 
-## Development server
+### 2. Problemática
+El desperdicio masivo de alimentos es una problemática global provocada principalmente por:
+* Vencimiento próximo de productos en estanterías de supermercados.
+* Excedentes de producción agrícola o sobreproducción en la industria gastronómica.
+* Alimentos descartados únicamente por cuestiones estéticas, a pesar de mantener sus propiedades de consumo.
+* **Falta de canales de comunicación eficientes** que conecten de manera rápida y transparente a los establecimientos donantes con las organizaciones receptoras, provocando que recursos aprovechables terminen innecesariamente en la basura.
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 3. Solución Propuesta
+Una plataforma web centralizada que agiliza el flujo operativo mediante:
+* **Registro de excedentes:** Permite a los comercios dar de alta alimentos próximos a vencer indicando cantidad, tipo y estado.
+* **Gestión de solicitudes:** Facilita a las organizaciones consultar el inventario disponible y realizar peticiones de forma ordenada.
+* **Trazabilidad y control:** Un esquema de roles y estados que asegura un proceso transparente desde la publicación del recurso hasta su entrega efectiva.

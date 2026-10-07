@@ -11,5 +11,5 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Food Donation App';
+  title = 'App';
 }

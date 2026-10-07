@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HistorialService } from '../../services/historial.service';
-import { AuthService } from '../../services/auth.service';
-import { HistorialEntrega } from '../../models/historial';
+import { HistorialService } from '../../core/services/historial.service';
+import { AuthService } from '../../core/services/auth.service';
+import { HistorialEntrega } from '../../core/models/historial';
 
 @Component({
   selector: 'app-historial',
@@ -39,26 +39,7 @@ export class HistorialComponent implements OnInit {
           datos = res.historial;
         }
 
-        const usuarioActual = this.authService.getUser();
-        const rolId = this.authService.getRoleId();
-        
-        // CORREGIDO: El administrador es el rol 3 en tu base de datos
-        const esAdmin = Number(rolId) === 3;
-
-        const nombreUsuario = (usuarioActual?.nombre_institucion || '').trim().toLowerCase();
-        const idUsuario = usuarioActual?.id_usuario;
-
-        if (!esAdmin && (nombreUsuario || idUsuario)) {
-          this.historiales = datos.filter((item: any) => {
-            const valSol = (item.solicitante_beneficiario || item.beneficiario || item.institucion || item.nombre_institucion || '').trim().toLowerCase();
-            const valId = item.id_usuario || item.id_beneficiario;
-            
-            return (nombreUsuario && valSol.includes(nombreUsuario)) || (idUsuario && valId === idUsuario);
-          });
-        } else {
-          // Si es Admin (rol 3), pasa todo el historial global sin filtrar
-          this.historiales = datos;
-        }
+        this.historiales = datos;
 
         this.cargando = false;
         this.cdr.detectChanges();

@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SolicitudService } from '../../services/solicitud.service';
-import { AuthService } from '../../services/auth.service';
-import { Solicitud } from '../../models/solicitud';
+import { SolicitudService } from '../../core/services/solicitud.service';
+import { AuthService } from '../../core/services/auth.service';
+import { Solicitud } from '../../core/models/solicitud';
 
 @Component({
   selector: 'app-solicitudes',

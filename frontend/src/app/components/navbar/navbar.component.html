@@ -5,12 +5,10 @@
   </div>
 
   <ul class="navbar-links">
-    <!-- Enlaces para usuarios comunes (No Administradores) -->
     <li *ngIf="!esAdmin">
       <a routerLink="/home">Inicio</a>
     </li>
 
-    <!-- Enlaces exclusivos de Administrador -->
     <li *ngIf="esAdmin">
       <a routerLink="/dashboard" routerLinkActive="active">Panel Admin</a>
     </li>
@@ -23,7 +21,7 @@
       <a routerLink="/historial" routerLinkActive="active">Historial Global</a>
     </li>
 
-    <!-- Enlaces para Donantes -->
+  
     <li *ngIf="esDonante && !esAdmin">
       <a routerLink="/alimentos" routerLinkActive="active">Mis Publicaciones</a>
     </li>
@@ -32,17 +30,16 @@
       <a routerLink="/solicitudes" routerLinkActive="active">Solicitudes Recibidas</a>
     </li>
 
-    <!-- Enlaces para Beneficiarios -->
     <li *ngIf="esBeneficiario && !esAdmin">
       <a routerLink="/solicitudes" routerLinkActive="active">Mis Solicitudes</a>
     </li>
 
-    <!-- Historial para usuarios normales -->
+    
     <li *ngIf="!esAdmin">
       <a routerLink="/historial" routerLinkActive="active">Historial</a>
     </li>
 
-    <!-- Perfil disponible para TODOS los roles (Admin, Donante, Beneficiario) -->
+    
     <li>
       <a routerLink="/perfil" routerLinkActive="active">Perfil</a>
     </li>

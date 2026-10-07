@@ -14,7 +14,6 @@
     {{ mensajeError }}
   </div>
 
-  <!-- Formulario de Edición Mejorado -->
   <div *ngIf="modoEdicion && usuarioSeleccionado" class="edit-card">
     <div class="edit-card-header">
       <h3>Editando a: <span>{{ usuarioSeleccionado.nombre_institucion }}</span> <small>(ID: #{{ usuarioSeleccionado.id_usuario }})</small></h3>
@@ -44,7 +43,6 @@
     </div>
   </div>
 
-  <!-- Tabla de Usuarios Moderna -->
   <div class="table-container" *ngIf="!cargando">
     <table class="modern-table">
       <thead>

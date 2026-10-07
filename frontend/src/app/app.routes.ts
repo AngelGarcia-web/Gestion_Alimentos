@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth-guard';
+import { AuthGuard } from './core/guards/auth-guard';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
@@ -23,7 +23,7 @@ export const routes: Routes = [
     path: 'alimentos', 
     component: AlimentosComponent, 
     canActivate: [AuthGuard],
-    data: { roles: [1, 3] } // Donantes y Admins
+    data: { roles: [1, 3] } 
   },
   { 
     path: 'solicitudes', 
@@ -41,13 +41,13 @@ export const routes: Routes = [
     path: 'dashboard', 
     component: DashboardComponent, 
     canActivate: [AuthGuard],
-    data: { roles: [3] } // <--- Exclusivo de Admin (Rol 3)
+    data: { roles: [3] } 
   },
   { 
     path: 'usuarios', 
     component: UsuariosComponent, 
     canActivate: [AuthGuard],
-    data: { roles: [3] } // <--- Exclusivo de Admin (Rol 3)
+    data: { roles: [3] } 
   },
   { 
     path: 'perfil', 

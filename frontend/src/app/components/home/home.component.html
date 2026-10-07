@@ -1,5 +1,4 @@
 <div class="home-container">
-  <!-- Cabecera Integrada (Título + Filtro en una sola barra) -->
   <div class="header-section">
     <h2 class="page-title">Publicaciones de Alimentos Disponibles</h2>
 
@@ -21,7 +20,6 @@
   <div *ngIf="mensajeRespuesta" class="alert alert-success">{{ mensajeRespuesta }}</div>
   <div *ngIf="mensajeError" class="alert alert-danger">{{ mensajeError }}</div>
 
-  <!-- Grid de Alimentos -->
   <div *ngIf="alimentosFiltrados.length > 0; else sinAlimentos" class="cards-grid">
     <div class="card-item" *ngFor="let alimento of alimentosFiltrados">
       <div>
@@ -60,7 +58,6 @@
         </div>
       </div>
 
-      <!-- Botón que activa el Modal -->
       <button 
         *ngIf="esBeneficiario && alimento.estado?.toLowerCase() === 'disponible'" 
         (click)="abrirModalSolicitud(alimento)" 
@@ -76,7 +73,6 @@
     </div>
   </ng-template>
 
-  <!-- MODAL / FORMULARIO FLOTANTE PROFESIONAL -->
   <div *ngIf="mostrarModalSolicitud" class="modal-overlay">
     <div class="modal-content">
       <h3>Solicitar: {{ alimentoSeleccionado?.titulo }}</h3>

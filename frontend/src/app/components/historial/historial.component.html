@@ -12,6 +12,7 @@
           <th>ID Historial</th>
           <th>N° Solicitud</th>
           <th>Alimento</th>
+          <th>Donante</th>
           <th>Solicitante / Beneficiario</th>
           <th>Fecha Entrega</th>
           <th>Observaciones</th>
@@ -23,6 +24,7 @@
           <td>#{{ item.id_historial || item.id_solicitud || 'N/A' }}</td>
           <td>#{{ item.id_solicitud || 'N/A' }}</td>
           <td>{{ item.alimento || item.titulo || 'N/A' }}</td>
+          <td><strong>{{ item.donante || 'N/A' }}</strong></td>
           <td>{{ item.solicitante || item.beneficiario || 'N/A' }}</td>
           <td>{{ (item.fecha_entrega || item.fecha_solicitud) | date:'dd/MM/yyyy HH:mm' }}</td>
           <td>{{ item.observaciones || item.mensaje || 'Sin observaciones' }}</td>
@@ -36,7 +38,7 @@
         </tr>
 
         <tr *ngIf="historiales.length === 0">
-          <td colspan="7" class="text-center">
+          <td colspan="8" class="text-center">
             No existen registros de entregas en el historial.
           </td>
         </tr>

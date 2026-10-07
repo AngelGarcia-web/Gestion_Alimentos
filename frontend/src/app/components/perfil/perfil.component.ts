@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UsuarioService } from '../../services/usuario.service';
-import { AuthService } from '../../services/auth.service';
-import { Usuario } from '../../models/usuario';
+import { UsuarioService } from '../../core/services/usuario.service';
+import { AuthService } from '../../core/services/auth.service';
+import { Usuario } from '../../core/models/usuario';
 
 @Component({
   selector: 'app-perfil',
@@ -39,7 +39,6 @@ export class PerfilComponent implements OnInit {
       next: (res: any) => {
         const data = res?.usuario || res?.data || res;
         if (data) {
-          // Actualizamos las propiedades del objeto actual en lugar de reemplazar la referencia
           Object.assign(this.usuario, data);
         }
         this.cdr.detectChanges();
