@@ -1,0 +1,58 @@
+<nav class="navbar" *ngIf="usuarioActual">
+  <div class="navbar-brand">
+    <a routerLink="/home" *ngIf="!esAdmin">Gestión Alimentos</a>
+    <span *ngIf="esAdmin" class="brand-text">Gestión Alimentos (Admin)</span>
+  </div>
+
+  <ul class="navbar-links">
+    <li *ngIf="!esAdmin">
+      <a routerLink="/home">Inicio</a>
+    </li>
+
+    <li *ngIf="esAdmin">
+      <a routerLink="/dashboard" routerLinkActive="active">Panel Admin</a>
+    </li>
+
+    <li *ngIf="esAdmin">
+      <a routerLink="/usuarios" routerLinkActive="active">Usuarios</a>
+    </li>
+
+    <li *ngIf="esAdmin">
+      <a routerLink="/historial" routerLinkActive="active">Historial Global</a>
+    </li>
+
+  
+    <li *ngIf="esDonante && !esAdmin">
+      <a routerLink="/alimentos" routerLinkActive="active">Mis Publicaciones</a>
+    </li>
+
+    <li *ngIf="esDonante && !esAdmin">
+      <a routerLink="/solicitudes" routerLinkActive="active">Solicitudes Recibidas</a>
+    </li>
+
+    <li *ngIf="esBeneficiario && !esAdmin">
+      <a routerLink="/solicitudes" routerLinkActive="active">Mis Solicitudes</a>
+    </li>
+
+    
+    <li *ngIf="!esAdmin">
+      <a routerLink="/historial" routerLinkActive="active">Historial</a>
+    </li>
+
+    
+    <li>
+      <a routerLink="/perfil" routerLinkActive="active">Perfil</a>
+    </li>
+  </ul>
+
+  <div class="navbar-user">
+    <div class="user-avatar">
+      <img *ngIf="usuarioActual.foto_url" [src]="usuarioActual.foto_url" alt="Avatar" class="avatar-header-img" />
+      <span *ngIf="!usuarioActual.foto_url">
+        {{ usuarioActual.nombre_institucion ? usuarioActual.nombre_institucion.charAt(0).toUpperCase() : 'U' }}
+      </span>
+    </div>
+    <span>{{ usuarioActual.nombre_institucion }}</span>
+    <button (click)="logout()" class="btn-logout">Cerrar Sesión</button>
+  </div>
+</nav>

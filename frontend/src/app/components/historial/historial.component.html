@@ -1,0 +1,48 @@
+<div class="historial-container">
+  <h2>Historial de Entregas y Trazabilidad</h2>
+
+  <div *ngIf="cargando" class="loading">
+    <p>Cargando registros del historial...</p>
+  </div>
+
+  <div *ngIf="!cargando" class="table-container">
+    <table class="tabla-historial">
+      <thead>
+        <tr>
+          <th>ID Historial</th>
+          <th>N° Solicitud</th>
+          <th>Alimento</th>
+          <th>Donante</th>
+          <th>Solicitante / Beneficiario</th>
+          <th>Fecha Entrega</th>
+          <th>Observaciones</th>
+          <th>Estado Confirmación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of historiales">
+          <td>#{{ item.id_historial || item.id_solicitud || 'N/A' }}</td>
+          <td>#{{ item.id_solicitud || 'N/A' }}</td>
+          <td>{{ item.alimento || item.titulo || 'N/A' }}</td>
+          <td><strong>{{ item.donante || 'N/A' }}</strong></td>
+          <td>{{ item.solicitante || item.beneficiario || 'N/A' }}</td>
+          <td>{{ (item.fecha_entrega || item.fecha_solicitud) | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ item.observaciones || item.mensaje || 'Sin observaciones' }}</td>
+          <td>
+            <span 
+              class="badge" 
+              [ngClass]="(item.confirmado_por_beneficiario || item.estado?.toLowerCase() === 'entregado' || item.estado?.toLowerCase() === 'completada') ? 'completada' : 'pendiente'">
+              {{ (item.confirmado_por_beneficiario || item.estado?.toLowerCase() === 'entregado' || item.estado?.toLowerCase() === 'completada') ? 'Entregado' : 'Pendiente' }}
+            </span>
+          </td>
+        </tr>
+
+        <tr *ngIf="historiales.length === 0">
+          <td colspan="8" class="text-center">
+            No existen registros de entregas en el historial.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

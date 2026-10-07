@@ -1,0 +1,154 @@
+.dashboard-container {
+padding: 30px;
+min-height: 100vh;
+background: #f4f7f5;
+font-family: Segoe UI, Arial, sans-serif;
+color: #1f2937;
+box-sizing: border-box;
+}
+
+.dashboard-container h2 {
+margin: 0 0 30px;
+font-size: 26px;
+font-weight: 700;
+color: #14532d;
+padding-bottom: 18px;
+border-bottom: 2px solid #dce8df;
+}
+
+/* Cargando */
+.loading {
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 180px;
+background: #ffffff;
+border: 1px solid #e2e8e4;
+border-radius: 14px;
+color: #64748b;
+box-shadow: 0 4px 15px rgba(31, 41, 55, 0.05);
+}
+
+.loading p {
+margin: 0;
+font-size: 15px;
+}
+
+/* Mensaje de error */
+.alert-error {
+padding: 15px 18px;
+margin-bottom: 25px;
+border-radius: 9px;
+background: #fee2e2;
+border: 1px solid #fca5a5;
+color: #991b1b;
+font-size: 14px;
+font-weight: 500;
+}
+
+/* Tarjetas KPI */
+.kpi-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 22px;
+}
+
+.kpi-card {
+position: relative;
+padding: 25px;
+background: #ffffff;
+border: 1px solid #e2e8e4;
+border-radius: 14px;
+box-shadow: 0 5px 18px rgba(31, 41, 55, 0.06);
+transition: all 0.25s ease;
+overflow: hidden;
+}
+
+.kpi-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 5px;
+height: 100%;
+background: #15803d;
+}
+
+.kpi-card:hover {
+transform: translateY(-4px);
+box-shadow: 0 9px 25px rgba(31, 41, 55, 0.1);
+}
+
+.kpi-title {
+margin-bottom: 12px;
+color: #64748b;
+font-size: 14px;
+font-weight: 600;
+}
+
+.kpi-value {
+color: #166534;
+font-size: 34px;
+font-weight: 700;
+line-height: 1;
+}
+
+/* Diferentes colores para las tarjetas */
+.kpi-card:nth-child(1)::before {
+background: #16a34a;
+}
+
+.kpi-card:nth-child(2)::before {
+background: #2563eb;
+}
+
+.kpi-card:nth-child(3)::before {
+background: #0891b2;
+}
+
+.kpi-card:nth-child(4)::before {
+background: #7c3aed;
+}
+
+.kpi-card:nth-child(2) .kpi-value {
+color: #2563eb;
+}
+
+.kpi-card:nth-child(3) .kpi-value {
+color: #0891b2;
+}
+
+.kpi-card:nth-child(4) .kpi-value {
+color: #7c3aed;
+}
+
+/* Tablets */
+@media (max-width: 1000px) {
+.kpi-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+.dashboard-container {
+padding: 20px 15px;
+}
+
+.dashboard-container h2 {
+font-size: 22px;
+}
+
+.kpi-grid {
+grid-template-columns: 1fr;
+gap: 15px;
+}
+
+.kpi-card {
+padding: 22px;
+}
+
+.kpi-value {
+font-size: 30px;
+}
+}
